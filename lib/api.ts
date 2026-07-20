@@ -10,7 +10,7 @@ import superjson from "superjson";
 // Em produção, esses tipos podem ser exportados de um pacote shared.
 export type { AppRouter } from "./types/router";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.appaxe.com.br";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://axeapp-web-production.up.railway.app";
 
 /**
  * Cria um cliente tRPC server-side (para Server Components e Route Handlers).

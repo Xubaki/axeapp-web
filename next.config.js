@@ -7,7 +7,7 @@ const nextConfig = {
 
   // Variáveis de ambiente públicas expostas ao browser
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "https://api.appaxe.com.br",
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "https://axeapp-web-production.up.railway.app",
   },
 
   // Otimização de imagens — desabilitado para hospedagem compartilhada
