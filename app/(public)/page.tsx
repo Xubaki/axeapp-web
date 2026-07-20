@@ -282,7 +282,7 @@ export default async function HomePage() {
               { nome: "Tambor de Mina", emoji: "🌊", desc: "Tradição maranhense" },
               { nome: "Batuque", emoji: "🎶", desc: "Tradição gaúcha" },
               { nome: "Xangô", emoji: "⚖️", desc: "Tradição pernambucana" },
-              { nome: "Espiritismo", emoji: "📖", desc: "Kardecismo e mediunidade" },
+              { nome: "Candomblé de Caboclo", emoji: "🌿", desc: "Sincretismo afro-indígena" },
             ].map((tradicao) => (
               <Link
                 key={tradicao.nome}

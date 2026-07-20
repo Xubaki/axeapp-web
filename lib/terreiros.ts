@@ -184,7 +184,6 @@ export const TRADICOES = [
   "Batuque",
   "Xangô",
   "Candomblé de Caboclo",
-  "Espiritismo Kardecista",
   "Outra",
 ];
 
