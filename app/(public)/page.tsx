@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Search, Star, Shield, Smartphone, ArrowRight, ChevronRight } from "lucide-react";
 import { listarTerreiros } from "@/lib/terreiros";
 import { TerreiroCard } from "@/components/terreiro/TerreiroCard";
@@ -33,7 +34,7 @@ export default async function HomePage() {
           <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              <span>🔥</span>
+              <Image src="/logo.png" alt="AxéApp" width={18} height={18} className="rounded-sm" />
               <span>O guia espiritual afro-brasileiro mais completo</span>
             </div>
 
@@ -249,7 +250,7 @@ export default async function HomePage() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-64 h-96 bg-white/10 rounded-3xl flex items-center justify-center border border-white/20 shadow-2xl">
                 <div className="text-center">
-                  <div className="text-6xl mb-4">🔥</div>
+                  <Image src="/logo.png" alt="AxéApp" width={80} height={80} className="rounded-2xl mx-auto mb-4" />
                   <p className="text-white/80 text-sm font-medium">AxéApp</p>
                   <p className="text-white/60 text-xs mt-1">Guia Espiritual</p>
                 </div>

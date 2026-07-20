@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, MapPin, CheckSquare, LogOut, Users } from "lucide-react";
 import type { SessionUser } from "@/lib/auth";
@@ -31,7 +32,7 @@ export function AdminSidebar({ user }: Props) {
       {/* Logo */}
       <div className="px-6 py-5 border-b border-white/10">
         <Link href="/admin" className="flex items-center gap-2">
-          <span className="text-2xl">🔥</span>
+          <Image src="/logo.png" alt="AxéApp" width={32} height={32} className="rounded-md" />
           <div>
             <p className="font-serif font-bold text-white">AxéApp</p>
             <p className="text-xs text-white/50">Painel Admin</p>

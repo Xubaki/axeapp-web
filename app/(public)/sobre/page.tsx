@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sobre o AxéApp",
@@ -12,7 +13,7 @@ export default function SobrePage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
-        <div className="text-5xl mb-4">🔥</div>
+        <Image src="/logo.png" alt="AxéApp" width={80} height={80} className="rounded-2xl mx-auto mb-4" />
         <h1 className="text-4xl font-serif font-bold text-foreground mb-4">
           Sobre o AxéApp
         </h1>

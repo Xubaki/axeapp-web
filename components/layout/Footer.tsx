@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import Image from "next/image";
+
 export function Footer() {
   return (
     <footer className="bg-foreground text-white mt-20">
@@ -8,7 +10,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 font-serif font-bold text-xl mb-3">
-              <span className="text-2xl">🔥</span>
+              <Image src="/logo.png" alt="AxéApp" width={28} height={28} className="rounded-md" />
               <span>AxéApp</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">

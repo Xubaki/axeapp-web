@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
+import Image from "next/image";
 import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="text-5xl mb-3">🔥</div>
+          <Image src="/logo.png" alt="AxéApp" width={64} height={64} className="rounded-2xl mx-auto mb-3" />
           <h1 className="text-2xl font-serif font-bold text-foreground">
             Entrar no AxéApp
           </h1>

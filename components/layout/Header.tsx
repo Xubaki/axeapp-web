@@ -1,5 +1,6 @@
 // Server Component — sem "use client"
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { MapPin, Search, LogIn } from "lucide-react";
 
@@ -19,7 +20,7 @@ export function Header() {
             href="/"
             className="flex items-center gap-2 font-serif font-bold text-xl text-amber-700"
           >
-            <span className="text-2xl">🔥</span>
+            <Image src="/logo.png" alt="AxéApp" width={32} height={32} className="rounded-md" />
             <span>AxéApp</span>
           </Link>
 
