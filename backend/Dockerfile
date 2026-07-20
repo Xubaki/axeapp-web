@@ -23,15 +23,19 @@ FROM node:20-alpine AS production
 
 WORKDIR /app
 
-# Instalar apenas dependências de produção
+# Instalar dependências de produção + drizzle-kit para migrações
 COPY package.json package-lock.json* ./
-RUN npm install --omit=dev --ignore-scripts
+RUN npm install --omit=dev --ignore-scripts && \
+    npm install drizzle-kit --save-dev --ignore-scripts
 
 # Copiar bundle gerado no stage de build
 COPY --from=builder /app/dist ./dist
 
-# Copiar migrations do Drizzle (necessário para db:migrate no start)
+# Copiar migrations do Drizzle (necessário para db:migrate)
 COPY --from=builder /app/drizzle ./drizzle
+
+# Copiar config do Drizzle (necessário para drizzle-kit migrate)
+COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
 
 # Porta padrão (Railway injeta PORT automaticamente)
 EXPOSE 3000
