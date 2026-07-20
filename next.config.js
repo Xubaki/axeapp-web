@@ -48,8 +48,16 @@ const nextConfig = {
         tls: false,
       };
     }
+    // Excluir pasta backend do bundle do Next.js
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: /backend/,
+    };
     return config;
   },
+
+  // Excluir pasta backend do TypeScript check do Next.js
+  transpilePackages: [],
 };
 
 module.exports = nextConfig;
