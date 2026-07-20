@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm transition-all duration-200 hover:bg-primary-dark active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-secondary text-foreground font-semibold text-sm transition-all duration-200 hover:bg-secondary-dark active:scale-95;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-semibold text-sm transition-all duration-200 hover:bg-primary hover:text-white active:scale-95;
+  }
+  .card {
+    @apply bg-surface rounded-xl shadow-sm border border-border p-6;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-surface text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all;
+  }
+  .badge-plano {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+}
+
+/* Leaflet map fixes */
+.leaflet-container {
+  z-index: 1;
+  border-radius: 0.75rem;
+}
+.leaflet-control-attribution {
+  font-size: 10px !important;
+}
