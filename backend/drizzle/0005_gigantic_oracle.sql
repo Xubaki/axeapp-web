@@ -1,0 +1,1 @@
+ALTER TABLE `perfis_espirituais` ADD `genero` enum('masculino','feminino','nao-binario','prefiro-nao-informar');

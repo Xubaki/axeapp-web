@@ -1,0 +1,1 @@
+ALTER TABLE `depoimentos` MODIFY COLUMN `userId` int;
