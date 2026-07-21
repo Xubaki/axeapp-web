@@ -18,7 +18,7 @@ export default function SobrePage() {
           Sobre o AxéApp
         </h1>
         <p className="text-xl text-muted max-w-2xl mx-auto">
-          Conectando pessoas às tradições afro-brasileiras com respeito,
+          Conectando pessoas às tradições do Axé com respeito,
           autenticidade e tecnologia.
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function SobrePage() {
           </h2>
           <p className="text-muted leading-relaxed">
             O AxéApp nasceu da necessidade de criar um espaço digital seguro e
-            respeitoso para as religiões afro-brasileiras. Nossa missão é
+            respeitoso para as religiões de matriz africana. Nossa missão é
             facilitar o encontro entre praticantes, simpatizantes e terreiros,
             preservando a autenticidade das tradições de Umbanda, Candomblé e
             outras religiões de matriz africana.

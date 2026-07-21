@@ -10,7 +10,7 @@ import { SearchBar } from "@/components/ui/SearchBar";
 export const metadata: Metadata = {
   title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
   description:
-    "Encontre terreiros de Umbanda e Candomblé perto de você. Mapa interativo, guia espiritual e comunidade afro-brasileira.",
+    "Encontre terreiros de Umbanda e Candomblé perto de você. Mapa interativo, guia espiritual e comunidade do Axé.",
 };
 
 export default async function HomePage() {
@@ -35,7 +35,7 @@ export default async function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
               <Image src="/logo.png" alt="AxéApp" width={18} height={18} className="rounded-sm" />
-              <span>O guia espiritual afro-brasileiro mais completo</span>
+              <span>O guia espiritual de Umbanda e Candomblé</span>
             </div>
 
             {/* Headline */}
@@ -78,22 +78,7 @@ export default async function HomePage() {
               </a>
             </div>
 
-            {/* Social proof */}
-            <div className="flex items-center justify-center gap-6 mt-10 text-sm text-muted">
-              <div className="flex items-center gap-1.5">
-                <div className="flex">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} size={14} className="text-secondary fill-secondary" />
-                  ))}
-                </div>
-                <span className="font-medium text-foreground">4.9</span>
-                <span>na App Store</span>
-              </div>
-              <span className="text-border">|</span>
-              <span>+10.000 usuários</span>
-              <span className="text-border">|</span>
-              <span>+500 terreiros cadastrados</span>
-            </div>
+
           </div>
         </div>
       </section>
@@ -268,7 +253,7 @@ export default async function HomePage() {
               Tradições que celebramos
             </h2>
             <p className="text-lg text-muted max-w-2xl mx-auto">
-              O AxéApp abraça a diversidade das religiões afro-brasileiras com
+              O AxéApp abraça a diversidade das religiões de matriz africana com
               respeito e autenticidade.
             </p>
           </div>

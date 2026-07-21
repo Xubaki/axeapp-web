@@ -15,7 +15,7 @@ export function Footer() {
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               Guia espiritual completo de Umbanda e Candomblé. Conectando
-              pessoas às tradições afro-brasileiras com respeito e
+              pessoas às tradições do Axé com respeito e
               autenticidade.
             </p>
             <div className="flex gap-3 mt-4">
@@ -98,7 +98,7 @@ export function Footer() {
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} AxéApp. Todos os direitos reservados.</p>
           <p className="text-xs">
-            Feito com ❤️ para a comunidade afro-brasileira
+            Feito com ❤️ para a comunidade do Axé
           </p>
         </div>
       </div>

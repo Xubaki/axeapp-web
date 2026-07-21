@@ -7,14 +7,14 @@ export const metadata: Metadata = {
     template: "%s | AxéApp",
   },
   description:
-    "Encontre terreiros de Umbanda e Candomblé perto de você. Guia espiritual completo com mapa interativo, informações sobre tradições afro-brasileiras e comunidade.",
+    "Encontre terreiros de Umbanda e Candomblé perto de você. Guia espiritual completo com mapa interativo, informações sobre as tradições do Axé e comunidade.",
   keywords: [
     "umbanda",
     "candomblé",
     "terreiro",
     "orixás",
     "espiritismo",
-    "religião afro-brasileira",
+    "tradições do axé",
     "axé",
     "guia espiritual",
   ],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "AxéApp",
     title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
     description:
-      "Encontre terreiros, aprenda sobre as tradições afro-brasileiras e conecte-se com a comunidade espiritual.",
+      "Encontre terreiros, aprenda sobre as tradições do Axé e conecte-se com a comunidade espiritual.",
     images: [
       {
         url: "/og-image.png",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
     description:
-      "Encontre terreiros, aprenda sobre as tradições afro-brasileiras e conecte-se com a comunidade espiritual.",
+      "Encontre terreiros, aprenda sobre as tradições do Axé e conecte-se com a comunidade espiritual.",
     images: ["/og-image.png"],
   },
   robots: {
