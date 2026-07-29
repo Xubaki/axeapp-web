@@ -60,12 +60,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://appaxe.com.br/parceiros"
-                  className="hover:text-white transition-colors"
-                >
+                <Link href="/parceiros" className="hover:text-white transition-colors">
                   Terreiro Parceiro
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -87,9 +84,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="hover:text-white transition-colors">
+                <a
+                  href="mailto:contato@appaxe.com.br"
+                  className="hover:text-white transition-colors"
+                >
                   Contato
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
