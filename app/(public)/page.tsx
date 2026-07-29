@@ -274,8 +274,8 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-500 text-amber-900 font-bold px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 hover:shadow-lg shadow-amber-200"
             >
-              <span className="text-2xl">☕</span>
-              Pagar um cafezinho
+              <span className="text-2xl">🌿</span>
+              Deixe um axézinho
             </a>
             <p className="text-sm text-muted italic">
               Qualquer valor já ajuda muito ✨
@@ -287,10 +287,6 @@ export default async function HomePage() {
             <div className="flex items-center gap-2">
               <span className="text-amber-500">✦</span>
               <span>100% independente</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-amber-500">✦</span>
-              <span>Sem fins lucrativos</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-amber-500">✦</span>
