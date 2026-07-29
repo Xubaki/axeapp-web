@@ -245,6 +245,61 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* BuyMeACoffee Section */}
+      <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Decorative element */}
+          <div className="text-5xl mb-6">🕯️</div>
+
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-4">
+            O Axé se sustenta com amor
+          </h2>
+
+          <p className="text-lg text-muted leading-relaxed mb-4 max-w-2xl mx-auto">
+            O AxéApp nasceu de uma missão: preservar e compartilhar as tradições
+            sagradas de Umbanda e Candomblé de forma acessível para todos.
+          </p>
+
+          <p className="text-base text-muted leading-relaxed mb-8 max-w-2xl mx-auto">
+            Cada consulta espiritual, cada mapa de terreiro, cada ponto cantado
+            que você encontra aqui foi construído com dedicação e respeito.
+            Se o AxéApp tocou sua jornada, considere oferecer um cafezinho
+            para manter essa chama acesa. 🔥
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="https://www.buymeacoffee.com/axeapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-500 text-amber-900 font-bold px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 hover:shadow-lg shadow-amber-200"
+            >
+              <span className="text-2xl">☕</span>
+              Pagar um cafezinho
+            </a>
+            <p className="text-sm text-muted italic">
+              Qualquer valor já ajuda muito ✨
+            </p>
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-muted">
+            <div className="flex items-center gap-2">
+              <span className="text-amber-500">✦</span>
+              <span>100% independente</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-amber-500">✦</span>
+              <span>Sem fins lucrativos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-amber-500">✦</span>
+              <span>Feito com amor pelo Axé</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Tradições Section */}
       <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
