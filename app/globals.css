@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 @layer base {
   * {
@@ -18,7 +18,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm transition-all duration-200 hover:bg-primary-dark active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-foreground font-semibold text-sm transition-all duration-200 hover:bg-primary-dark active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg bg-secondary text-foreground font-semibold text-sm transition-all duration-200 hover:bg-secondary-dark active:scale-95;
@@ -27,7 +27,21 @@
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-semibold text-sm transition-all duration-200 hover:bg-primary hover:text-white active:scale-95;
   }
   .card {
-    @apply bg-surface rounded-xl shadow-sm border border-border p-6;
+    @apply bg-surface rounded-xl shadow-sm border border-border p-6 relative overflow-hidden;
+  }
+  /* Textura de ruído sutil nos cards */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 0;
+  }
+  .card > * {
+    position: relative;
+    z-index: 1;
   }
   .input-field {
     @apply w-full px-4 py-3 rounded-lg border border-border bg-surface text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all;

@@ -249,7 +249,7 @@ export default async function HomePage() {
       <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Decorative element */}
-          <div className="text-5xl mb-6">🕯️</div>
+          <div className="flex justify-center mb-6"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21h6M12 21V9"/><path d="M12 9C12 6 9 4 9 4s0 4 3 5z"/><path d="M12 9C12 6 15 4 15 4s0 4-3 5z"/><rect x="9" y="9" width="6" height="12" rx="1"/></svg></div>
 
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-4">
             O Axé se sustenta com amor
@@ -274,7 +274,7 @@ export default async function HomePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-500 text-amber-900 font-bold px-8 py-4 rounded-2xl text-lg transition-all hover:scale-105 hover:shadow-lg shadow-amber-200"
             >
-              <span className="text-2xl">🌿</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D4A28" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
               Deixe um axézinho
             </a>
             <p className="text-sm text-muted italic">
@@ -311,21 +311,21 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
-              { nome: "Umbanda", emoji: "🕯️", desc: "Caridade e evolução espiritual" },
-              { nome: "Candomblé", emoji: "🥁", desc: "Tradições africanas preservadas" },
-              { nome: "Quimbanda", emoji: "⚡", desc: "Trabalhos e magia" },
-              { nome: "Jurema", emoji: "🌿", desc: "Tradição indígena nordestina" },
-              { nome: "Tambor de Mina", emoji: "🌊", desc: "Tradição maranhense" },
-              { nome: "Batuque", emoji: "🎶", desc: "Tradição gaúcha" },
-              { nome: "Xangô", emoji: "⚖️", desc: "Tradição pernambucana" },
-              { nome: "Candomblé de Caboclo", emoji: "🌿", desc: "Sincretismo afro-indígena" },
+              { nome: "Umbanda", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>, desc: "Caridade e evolução espiritual" },
+              { nome: "Candomblé", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="14" rx="8" ry="3"/><path d="M4 14V8a8 3 0 0 1 16 0v6"/><path d="M12 11v3"/></svg>, desc: "Tradições africanas preservadas" },
+              { nome: "Quimbanda", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, desc: "Trabalhos e magia" },
+              { nome: "Jurema", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12M12 12C12 7 7 4 3 6M12 12C12 7 17 4 21 6M12 12C12 16 8 19 5 18M12 12C12 16 16 19 19 18"/></svg>, desc: "Tradição indígena nordestina" },
+              { nome: "Tambor de Mina", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>, desc: "Tradição maranhense" },
+              { nome: "Batuque", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>, desc: "Tradição gaúcha" },
+              { nome: "Xangô", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l2.5 6.5H21l-5.5 4 2 6.5L12 16l-5.5 4 2-6.5L3 9.5h6.5L12 3z"/></svg>, desc: "Tradição pernambucana" },
+              { nome: "Candomblé de Caboclo", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12M12 12C12 7 7 4 3 6M12 12C12 7 17 4 21 6"/><circle cx="12" cy="7" r="2"/></svg>, desc: "Sincretismo afro-indígena" },
             ].map((tradicao) => (
               <Link
                 key={tradicao.nome}
                 href={`/terreiros?tradicao=${encodeURIComponent(tradicao.nome)}`}
                 className="card text-center hover:shadow-md hover:border-primary/30 transition-all group"
               >
-                <div className="text-3xl mb-2">{tradicao.emoji}</div>
+                <div className="flex justify-center mb-3">{tradicao.svg}</div>
                 <h3 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
                   {tradicao.nome}
                 </h3>

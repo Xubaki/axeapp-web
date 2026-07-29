@@ -18,7 +18,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-serif font-bold text-xl text-amber-700"
+            className="flex items-center gap-2 font-serif font-bold text-xl text-primary"
           >
             <Image src="/logo.png" alt="AxéApp" width={32} height={32} className="rounded-md" />
             <span>AxéApp</span>
@@ -28,21 +28,21 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/terreiros"
-              className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-amber-700 transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-primary transition-colors"
             >
               <Search size={16} />
               Buscar Terreiros
             </Link>
             <Link
               href="/mapa"
-              className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-amber-700 transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-primary transition-colors"
             >
               <MapPin size={16} />
               Mapa
             </Link>
             <Link
               href="/sobre"
-              className="text-sm font-medium text-gray-700 hover:text-amber-700 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
             >
               Sobre
             </Link>
@@ -52,14 +52,14 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/login"
-              className="flex items-center gap-1.5 border border-amber-700 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 transition-colors"
+              className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/10 transition-colors"
             >
               <LogIn size={16} />
               Entrar
             </Link>
             <Link
               href="/#download"
-              className="bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-800 transition-colors"
+              className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
             >
               Baixar App
             </Link>
