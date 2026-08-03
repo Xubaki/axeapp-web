@@ -10,7 +10,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 font-serif font-bold text-xl mb-3">
-              <Image src="/logo.png" alt="AxéApp" width={28} height={28} className="rounded-md" />
+              <Image src="/icon-mono.png" alt="AxéApp" width={28} height={28} className="rounded-md bg-white" />
               <span>AxéApp</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
