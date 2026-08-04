@@ -1,3 +1,5 @@
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Output standalone para compatibilidade com Node.js tradicional (Hostinger)
@@ -42,6 +44,11 @@ const nextConfig = {
   // Next 16 usa Turbopack por padrão; o build de produção na Hostinger
   // chama `next build --webpack` (ver package.json) por causa desta config.
   webpack: (config, { isServer }) => {
+    // Garante alias @/ no build da Hostinger (webpack + SWC WASM)
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname),
+    };
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
