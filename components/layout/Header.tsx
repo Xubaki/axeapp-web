@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { MapPin, Search, LogIn } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 
 // MobileMenu é client-only (usa useState) — carregado apenas no browser
 const MobileMenu = dynamic(
@@ -48,15 +48,8 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA Desktop */}
+          {/* CTA Desktop — Entrar oculto do público (admin: /login direto) */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/login"
-              className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/10 transition-colors"
-            >
-              <LogIn size={16} />
-              Entrar
-            </Link>
             <Link
               href="/#download"
               className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
@@ -65,7 +58,6 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile menu (client-only, ssr:false) */}
           <MobileMenu />
         </div>
       </div>

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, LogIn, Loader2 } from "lucide-react";
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [showSenha, setShowSenha] = useState(false);
@@ -32,12 +33,8 @@ export function LoginForm() {
         return;
       }
 
-      // Redirecionar para admin se for admin, senão para home
-      if (data.role && ["admin", "master", "senior"].includes(data.role)) {
-        router.push("/admin");
-      } else {
-        router.push("/");
-      }
+      const redirectTo = searchParams.get("redirect") || "/admin";
+      router.push(redirectTo.startsWith("/") ? redirectTo : "/admin");
       router.refresh();
     } catch {
       setError("Erro de conexão. Tente novamente.");

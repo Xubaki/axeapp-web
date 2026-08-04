@@ -1,19 +1,39 @@
 import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import { CheckSquare, MapPin, Clock, TrendingUp } from "lucide-react";
+import {
+  CheckSquare,
+  MapPin,
+  Clock,
+  TrendingUp,
+  Users,
+  Crown,
+  MessageCircle,
+  BookOpen,
+  Sparkles,
+} from "lucide-react";
 import { getSessionToken } from "@/lib/auth";
 import { listarTerreiros, listarTerreirosPendentes } from "@/lib/terreiros";
+import { buscarMetricasAnalytics } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "Dashboard Admin | AxéApp",
 };
 
+function formatDate(value: string | Date): string {
+  try {
+    return new Date(value).toLocaleDateString("pt-BR");
+  } catch {
+    return "—";
+  }
+}
+
 export default async function AdminDashboardPage() {
   const token = await getSessionToken();
-  const [todos, pendentes] = await Promise.all([
+  const [todos, pendentes, metricas] = await Promise.all([
     listarTerreiros(),
     token ? listarTerreirosPendentes(token) : Promise.resolve([]),
+    token ? buscarMetricasAnalytics(token) : Promise.resolve(null),
   ]);
 
   const verificados = todos.filter((t) => t.isVerified === 1).length;
@@ -32,11 +52,14 @@ export default async function AdminDashboardPage() {
           Dashboard
         </h1>
         <p className="text-muted text-sm mt-1">
-          Visão geral do AxéApp
+          Visão geral do AxéApp — terreiros + métricas do app
         </p>
       </div>
 
-      {/* Stats */}
+      {/* Stats terreiros */}
+      <h2 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">
+        Diretório de Terreiros
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[
           {
@@ -63,7 +86,10 @@ export default async function AdminDashboardPage() {
           },
           {
             label: "Taxa de Verificação",
-            value: todos.length > 0 ? `${Math.round((verificados / todos.length) * 100)}%` : "0%",
+            value:
+              todos.length > 0
+                ? `${Math.round((verificados / todos.length) * 100)}%`
+                : "0%",
             icon: TrendingUp,
             color: "text-secondary",
             bg: "bg-secondary/10",
@@ -88,6 +114,178 @@ export default async function AdminDashboardPage() {
           </div>
         ))}
       </div>
+
+      {/* Stats app (mesma API do Dashboard Analytics do mobile) */}
+      <h2 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">
+        Métricas do App
+      </h2>
+      {metricas ? (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            {[
+              {
+                label: "Usuários",
+                value: metricas.totalUsuarios,
+                sub: `+${metricas.novosUsuarios7d} nos últimos 7d`,
+                icon: Users,
+                color: "text-primary",
+                bg: "bg-primary/10",
+              },
+              {
+                label: "Ativos 7d",
+                value: metricas.usuariosAtivos7d,
+                sub: `${metricas.usuariosAtivos30d} ativos em 30d`,
+                icon: Sparkles,
+                color: "text-success",
+                bg: "bg-success/10",
+              },
+              {
+                label: "Assinantes ativos",
+                value: metricas.assinantesAtivos,
+                sub: `${metricas.assinantesMensal} mensal · ${metricas.assinantesAnual} anual`,
+                icon: Crown,
+                color: "text-warning",
+                bg: "bg-warning/10",
+              },
+              {
+                label: "Taxa de conversão",
+                value: `${metricas.taxaConversao}%`,
+                sub: `${metricas.totalAssinantes} assinaturas no histórico`,
+                icon: TrendingUp,
+                color: "text-secondary",
+                bg: "bg-secondary/10",
+              },
+            ].map((stat) => (
+              <div key={stat.label} className="card">
+                <div className={`p-2 rounded-lg ${stat.bg} w-fit mb-3`}>
+                  <stat.icon size={20} className={stat.color} />
+                </div>
+                <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                <p className="text-sm text-muted mt-1">{stat.label}</p>
+                <p className="text-xs text-muted/80 mt-1">{stat.sub}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              {
+                label: "Consultas",
+                value: metricas.totalConsultas,
+                sub: `${metricas.consultasHoje} hoje · ${metricas.consultas7d} em 7d`,
+                icon: MessageCircle,
+              },
+              {
+                label: "Depoimentos",
+                value: metricas.totalDepoimentos,
+                sub: `+${metricas.depoimentos7d} em 7d`,
+                icon: BookOpen,
+              },
+              {
+                label: "Diário",
+                value: metricas.totalEntradasDiario,
+                sub: "entradas registradas",
+                icon: BookOpen,
+              },
+              {
+                label: "Orixá mais consultado",
+                value: metricas.orixaMaisConsultado?.orixaNome ?? "—",
+                sub: metricas.orixaMaisConsultado
+                  ? `${metricas.orixaMaisConsultado.total} consultas`
+                  : "sem dados",
+                icon: Sparkles,
+              },
+            ].map((stat) => (
+              <div key={stat.label} className="card">
+                <div className="p-2 rounded-lg bg-primary/10 w-fit mb-3">
+                  <stat.icon size={20} className="text-primary" />
+                </div>
+                <p className="text-xl font-bold text-foreground truncate">
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted mt-1">{stat.label}</p>
+                <p className="text-xs text-muted/80 mt-1">{stat.sub}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="card">
+              <h2 className="font-semibold text-foreground mb-4">
+                Assinantes por plataforma
+              </h2>
+              <div className="space-y-3">
+                {[
+                  {
+                    label: "Android",
+                    valor: metricas.plataformaAndroid,
+                  },
+                  { label: "iOS", valor: metricas.plataformaIos },
+                ].map((row) => {
+                  const total =
+                    metricas.plataformaAndroid + metricas.plataformaIos;
+                  const pct =
+                    total > 0 ? Math.round((row.valor / total) * 100) : 0;
+                  return (
+                    <div key={row.label} className="flex items-center gap-3">
+                      <span className="text-sm text-foreground w-20">
+                        {row.label}
+                      </span>
+                      <div className="flex-1 bg-gray-100 rounded-full h-2">
+                        <div
+                          className="bg-primary rounded-full h-2"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      <span className="text-sm font-medium w-8 text-right">
+                        {row.valor}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="card">
+              <h2 className="font-semibold text-foreground mb-4">
+                Últimas assinaturas
+              </h2>
+              {metricas.ultimasAssinaturas.length === 0 ? (
+                <p className="text-sm text-muted py-4 text-center">
+                  Nenhuma assinatura recente
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {metricas.ultimasAssinaturas.slice(0, 8).map((a) => (
+                    <div
+                      key={a.id}
+                      className="flex items-center justify-between gap-3 py-2 border-b border-border last:border-0"
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-foreground capitalize">
+                          {a.plano}
+                        </p>
+                        <p className="text-xs text-muted">
+                          {a.plataforma} · {formatDate(a.dataInicio)}
+                        </p>
+                      </div>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-success/10 text-success capitalize">
+                        {a.status}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="card mb-8 text-sm text-muted">
+          Não foi possível carregar as métricas do app. Confirme que você está
+          logado como admin e que a API (
+          <code className="text-xs">NEXT_PUBLIC_API_URL</code>) está correta.
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pendentes de aprovação */}
@@ -153,7 +351,7 @@ export default async function AdminDashboardPage() {
                     <div
                       className="bg-primary rounded-full h-2 transition-all"
                       style={{
-                        width: `${Math.round((count / todos.length) * 100)}%`,
+                        width: `${Math.round((count / Math.max(todos.length, 1)) * 100)}%`,
                       }}
                     />
                   </div>

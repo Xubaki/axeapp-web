@@ -1,7 +1,7 @@
 /**
  * lib/auth.ts
- * Funções de autenticação para o site Next.js.
- * Reutiliza o mesmo fluxo de auth do app mobile (Opção A — auth própria).
+ * Sessão do site Next.js (painel admin).
+ * Cookie assinado contém apiToken (mobile) + role/nome para isAdmin().
  */
 import { cookies } from "next/headers";
 import { jwtVerify, SignJWT } from "jose";
@@ -21,39 +21,77 @@ export type SessionUser = {
   role?: string | null;
 };
 
+type SessionPayload = SessionUser & {
+  apiToken: string;
+};
+
 /**
- * Obtém o token de sessão do cookie.
+ * Monta cookie de sessão admin (token da API + perfil).
  */
-export async function getSessionToken(): Promise<string | null> {
-  const cookieStore = cookies();
-  return cookieStore.get(SESSION_COOKIE)?.value ?? null;
+export async function createSessionCookieValue(
+  apiToken: string,
+  user: SessionUser
+): Promise<string> {
+  return new SignJWT({
+    apiToken,
+    id: user.id,
+    openId: user.openId,
+    name: user.name ?? null,
+    email: user.email ?? null,
+    avatarUrl: user.avatarUrl ?? null,
+    role: user.role ?? null,
+  })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("30d")
+    .sign(JWT_SECRET);
 }
 
-/**
- * Obtém o usuário da sessão atual (Server Component).
- */
-export async function getSessionUser(): Promise<SessionUser | null> {
-  const token = await getSessionToken();
-  if (!token) return null;
+async function readSessionPayload(): Promise<SessionPayload | null> {
+  const cookieStore = cookies();
+  const raw = cookieStore.get(SESSION_COOKIE)?.value;
+  if (!raw) return null;
 
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
-    return payload as unknown as SessionUser;
+    const { payload } = await jwtVerify(raw, JWT_SECRET);
+    const data = payload as unknown as SessionPayload;
+    if (!data.apiToken || !data.openId) return null;
+    return data;
   } catch {
     return null;
   }
 }
 
 /**
- * Verifica se o usuário tem role de admin.
+ * Token Bearer para chamar a API do app (aprovações etc.).
  */
+export async function getSessionToken(): Promise<string | null> {
+  const session = await readSessionPayload();
+  return session?.apiToken ?? null;
+}
+
+/**
+ * Perfil da sessão atual (Server Component).
+ */
+export async function getSessionUser(): Promise<SessionUser | null> {
+  const session = await readSessionPayload();
+  if (!session) return null;
+  return {
+    id: session.id,
+    openId: session.openId,
+    name: session.name,
+    email: session.email,
+    avatarUrl: session.avatarUrl,
+    role: session.role,
+  };
+}
+
 export function isAdmin(user: SessionUser | null): boolean {
   return ["admin", "master", "senior"].includes(user?.role ?? "");
 }
 
 /**
  * Faz login com e-mail e senha via API do app mobile.
- * Retorna o token JWT ou lança erro.
  */
 export async function loginWithEmail(
   email: string,
@@ -73,13 +111,14 @@ export async function loginWithEmail(
 
   const data = await res.json();
   const result = data?.[0]?.result?.data?.json;
+  const sessionToken = result?.sessionToken ?? result?.token;
 
-  if (!result?.token) {
+  if (!sessionToken) {
     throw new Error(result?.message || "Erro ao fazer login");
   }
 
   return {
-    token: result.token,
+    token: sessionToken,
     user: {
       id: result.user?.id,
       openId: result.user?.openId,
@@ -91,9 +130,6 @@ export async function loginWithEmail(
   };
 }
 
-/**
- * Solicita recuperação de senha via API.
- */
 export async function requestPasswordReset(email: string): Promise<void> {
   const res = await fetch(`${apiBaseUrl}/api/trpc/auth.forgotPassword`, {
     method: "POST",
@@ -108,9 +144,6 @@ export async function requestPasswordReset(email: string): Promise<void> {
   }
 }
 
-/**
- * Redefine a senha com o token recebido por e-mail.
- */
 export async function resetPassword(
   token: string,
   novaSenha: string
