@@ -1,16 +1,14 @@
 /**
  * lib/api.ts
- * Cliente tRPC para o site Next.js — conecta à mesma API do app mobile.
+ * Cliente tRPC para o site Next.js — mesma API do app mobile.
  */
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import { PRODUCTION_API_BASE_URL } from "@/constants/production-defaults";
+import { resolveApiBaseUrl } from "@/constants/production-defaults";
 
 export type { AppRouter } from "./types/router";
 
-const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL || PRODUCTION_API_BASE_URL
-).replace(/\/$/, "");
+const API_URL = resolveApiBaseUrl(process.env.NEXT_PUBLIC_API_URL);
 
 /**
  * Cria um cliente tRPC server-side (para Server Components e Route Handlers).
@@ -47,7 +45,8 @@ export function unwrapTrpcData<T = unknown>(data: unknown): T | null {
 /** Extrai mensagem de erro tRPC (batch ou objeto único). */
 export function unwrapTrpcError(data: unknown): string | null {
   const first = Array.isArray(data) ? data[0] : data;
-  const err = (first as { error?: { json?: { message?: string }; message?: string } })
-    ?.error;
+  const err = (
+    first as { error?: { json?: { message?: string }; message?: string } }
+  )?.error;
   return err?.json?.message || err?.message || null;
 }

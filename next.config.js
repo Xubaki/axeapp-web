@@ -1,4 +1,7 @@
 const path = require("path");
+const {
+  resolveApiBaseUrl,
+} = require("./constants/production-defaults.js");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,9 +10,10 @@ const nextConfig = {
   // Para Hostinger, usamos o build padrão com server-side rendering.
   // output: "standalone",
 
-  // Variáveis de ambiente públicas expostas ao browser
+  // Injeta no bundle (client + server) a mesma API do app mobile.
+  // Hosts legados (ex.: Railway) são remapeados em resolveApiBaseUrl.
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "https://axeapp-vdtapk2t.manus.space",
+    NEXT_PUBLIC_API_URL: resolveApiBaseUrl(process.env.NEXT_PUBLIC_API_URL),
   },
 
   // Otimização de imagens — desabilitado para hospedagem compartilhada

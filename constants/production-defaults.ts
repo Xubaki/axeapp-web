@@ -1,6 +1,5 @@
-/**
- * Mesma API do app mobile (constants/production-defaults).
- * Hostinger: preferir setar NEXT_PUBLIC_API_URL no painel; este é o fallback.
- */
-export const PRODUCTION_API_BASE_URL =
-  "https://axeapp-vdtapk2t.manus.space";
+export {
+  PRODUCTION_API_BASE_URL,
+  STALE_API_HOSTNAMES,
+  resolveApiBaseUrl,
+} from "./production-defaults.js";
