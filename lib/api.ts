@@ -4,7 +4,7 @@
  */
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import { resolveApiBaseUrl } from "@/constants/production-defaults";
+import { resolveApiBaseUrl } from "@/constants/production-defaults.js";
 
 export type { AppRouter } from "./types/router";
 
