@@ -6,6 +6,7 @@ import { MapPin, Search, Star, Shield, Smartphone, ArrowRight, ChevronRight } fr
 import { listarTerreiros } from "@/lib/terreiros";
 import { TerreiroCard } from "@/components/terreiro/TerreiroCard";
 import { SearchBar } from "@/components/ui/SearchBar";
+import { TradicoesSection } from "@/components/home/TradicoesSection";
 
 export const metadata: Metadata = {
   title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
@@ -296,45 +297,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Tradições Section */}
-      <section className="py-20 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-4">
-              Tradições que celebramos
-            </h2>
-            <p className="text-lg text-muted max-w-2xl mx-auto">
-              O AxéApp abraça a diversidade das religiões de matriz africana com
-              respeito e autenticidade.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[
-              { nome: "Umbanda", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>, desc: "Caridade e evolução espiritual" },
-              { nome: "Candomblé", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="14" rx="8" ry="3"/><path d="M4 14V8a8 3 0 0 1 16 0v6"/><path d="M12 11v3"/></svg>, desc: "Tradições africanas preservadas" },
-              { nome: "Quimbanda", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, desc: "Trabalhos e magia" },
-              { nome: "Jurema", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12M12 12C12 7 7 4 3 6M12 12C12 7 17 4 21 6M12 12C12 16 8 19 5 18M12 12C12 16 16 19 19 18"/></svg>, desc: "Tradição indígena nordestina" },
-              { nome: "Tambor de Mina", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>, desc: "Tradição maranhense" },
-              { nome: "Batuque", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>, desc: "Tradição gaúcha" },
-              { nome: "Xangô", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l2.5 6.5H21l-5.5 4 2 6.5L12 16l-5.5 4 2-6.5L3 9.5h6.5L12 3z"/></svg>, desc: "Tradição pernambucana" },
-              { nome: "Candomblé de Caboclo", svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A6741" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12M12 12C12 7 7 4 3 6M12 12C12 7 17 4 21 6"/><circle cx="12" cy="7" r="2"/></svg>, desc: "Sincretismo afro-indígena" },
-            ].map((tradicao) => (
-              <Link
-                key={tradicao.nome}
-                href={`/terreiros?tradicao=${encodeURIComponent(tradicao.nome)}`}
-                className="card text-center hover:shadow-md hover:border-primary/30 transition-all group"
-              >
-                <div className="flex justify-center mb-3">{tradicao.svg}</div>
-                <h3 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
-                  {tradicao.nome}
-                </h3>
-                <p className="text-xs text-muted mt-1">{tradicao.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Tradições Section — design Manus portado */}
+      <TradicoesSection />
     </>
   );
 }
