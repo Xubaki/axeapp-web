@@ -1,20 +1,19 @@
 /**
  * lib/api.ts
  * Cliente tRPC para o site Next.js — conecta à mesma API do app mobile.
- * Usa httpBatchLink com superjson (mesmo transformer do app).
  */
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
+import { PRODUCTION_API_BASE_URL } from "@/constants/production-defaults";
 
-// Tipos importados do app mobile (compartilhados via referência de tipo)
-// Em produção, esses tipos podem ser exportados de um pacote shared.
 export type { AppRouter } from "./types/router";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://axeapp-web-production.up.railway.app";
+const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL || PRODUCTION_API_BASE_URL
+).replace(/\/$/, "");
 
 /**
  * Cria um cliente tRPC server-side (para Server Components e Route Handlers).
- * Aceita um token de sessão opcional para chamadas autenticadas.
  */
 export function createServerClient(sessionToken?: string) {
   return createTRPCProxyClient<import("./types/router").AppRouter>({
@@ -30,7 +29,25 @@ export function createServerClient(sessionToken?: string) {
   });
 }
 
-/**
- * URL base da API — usada para chamadas fetch diretas quando necessário.
- */
+/** URL base da API — fetch direto (SSR / route handlers). */
 export const apiBaseUrl = API_URL;
+
+/** Extrai payload JSON de uma resposta tRPC (batch array ou objeto único). */
+export function unwrapTrpcData<T = unknown>(data: unknown): T | null {
+  if (Array.isArray(data)) {
+    return (data[0]?.result?.data?.json ?? null) as T | null;
+  }
+  if (data && typeof data === "object" && "result" in data) {
+    const single = data as { result?: { data?: { json?: T } } };
+    return single.result?.data?.json ?? null;
+  }
+  return null;
+}
+
+/** Extrai mensagem de erro tRPC (batch ou objeto único). */
+export function unwrapTrpcError(data: unknown): string | null {
+  const first = Array.isArray(data) ? data[0] : data;
+  const err = (first as { error?: { json?: { message?: string }; message?: string } })
+    ?.error;
+  return err?.json?.message || err?.message || null;
+}

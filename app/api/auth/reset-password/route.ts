@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.resetPassword`, {
+    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.resetPassword?batch=1`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
     });
 
     const data = await res.json();
-    const trpcError = data?.[0]?.error;
+    const { unwrapTrpcError } = await import("@/lib/api");
+    const trpcError = unwrapTrpcError(data);
 
     if (trpcError || !res.ok) {
       return NextResponse.json(

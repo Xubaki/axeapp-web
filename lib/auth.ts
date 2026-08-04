@@ -5,7 +5,7 @@
  */
 import { cookies } from "next/headers";
 import { jwtVerify, SignJWT } from "jose";
-import { apiBaseUrl } from "./api";
+import { apiBaseUrl, unwrapTrpcData } from "./api";
 
 const SESSION_COOKIE = "axe_session";
 const JWT_SECRET = new TextEncoder().encode(
@@ -97,7 +97,7 @@ export async function loginWithEmail(
   email: string,
   password: string
 ): Promise<{ token: string; user: SessionUser }> {
-  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.loginEmail`, {
+  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.loginEmail?batch=1`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -110,7 +110,12 @@ export async function loginWithEmail(
   }
 
   const data = await res.json();
-  const result = data?.[0]?.result?.data?.json;
+  const result = unwrapTrpcData<{
+    sessionToken?: string;
+    token?: string;
+    message?: string;
+    user?: SessionUser;
+  }>(data);
   const sessionToken = result?.sessionToken ?? result?.token;
 
   if (!sessionToken) {
@@ -120,18 +125,18 @@ export async function loginWithEmail(
   return {
     token: sessionToken,
     user: {
-      id: result.user?.id,
-      openId: result.user?.openId,
-      name: result.user?.name,
-      email: result.user?.email,
-      avatarUrl: result.user?.avatarUrl,
-      role: result.user?.role,
+      id: result!.user!.id,
+      openId: result!.user!.openId,
+      name: result!.user!.name,
+      email: result!.user!.email,
+      avatarUrl: result!.user!.avatarUrl,
+      role: result!.user!.role,
     },
   };
 }
 
 export async function requestPasswordReset(email: string): Promise<void> {
-  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.forgotPassword`, {
+  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.forgotPassword?batch=1`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -148,7 +153,7 @@ export async function resetPassword(
   token: string,
   novaSenha: string
 ): Promise<void> {
-  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.resetPassword`, {
+  const res = await fetch(`${apiBaseUrl}/api/trpc/auth.resetPassword?batch=1`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

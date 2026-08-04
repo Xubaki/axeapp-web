@@ -120,7 +120,7 @@ export async function verificarTerreiro(
   sessionToken: string
 ): Promise<boolean> {
   try {
-    const res = await fetch(`${apiBaseUrl}/api/trpc/terreiros.verificar`, {
+    const res = await fetch(`${apiBaseUrl}/api/trpc/terreiros.verificar?batch=1`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -143,7 +143,7 @@ export async function revogarVerificacao(
 ): Promise<boolean> {
   try {
     const res = await fetch(
-      `${apiBaseUrl}/api/trpc/terreiros.revogarVerificacao`,
+      `${apiBaseUrl}/api/trpc/terreiros.revogarVerificacao?batch=1`,
       {
         method: "POST",
         headers: {

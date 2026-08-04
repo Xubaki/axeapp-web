@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { apiBaseUrl } from "@/lib/api";
-import { createSessionCookieValue, isAdmin } from "@/lib/auth";
+import { apiBaseUrl, unwrapTrpcData, unwrapTrpcError } from "@/lib/api";
+import { createSessionCookieValue, isAdmin, type SessionUser } from "@/lib/auth";
 
 const SESSION_COOKIE = "axe_session";
 
-function extractTrpcError(data: unknown): string | null {
-  const batch = data as { [k: string]: unknown } | unknown[];
-  const first = Array.isArray(batch) ? batch[0] : (batch as { 0?: unknown })?.[0];
-  const err = (first as { error?: { json?: { message?: string }; message?: string } })?.error;
-  return err?.json?.message || err?.message || null;
-}
+type LoginResult = {
+  sessionToken?: string;
+  token?: string;
+  message?: string;
+  user?: {
+    id: number;
+    openId: string;
+    name?: string | null;
+    email?: string | null;
+    avatarUrl?: string | null;
+    role?: string | null;
+  };
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +30,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.loginEmail`, {
+    // Mesmo formato do httpBatchLink do app (`?batch=1`)
+    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.loginEmail?batch=1`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,19 +39,39 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    const data = await res.json();
-    const result = data?.[0]?.result?.data?.json;
-    const trpcErrorMsg = extractTrpcError(data);
+    const data = await res.json().catch(() => null);
+    if (!data) {
+      console.error("[auth/login] API sem JSON", apiBaseUrl, res.status);
+      return NextResponse.json(
+        { error: "Não foi possível falar com a API. Tente novamente." },
+        { status: 502 }
+      );
+    }
+
+    const result = unwrapTrpcData<LoginResult>(data);
+    const trpcErrorMsg = unwrapTrpcError(data);
     const apiToken = result?.sessionToken ?? result?.token;
 
     if (trpcErrorMsg || !apiToken || !result?.user) {
+      console.error("[auth/login] falha", {
+        apiBaseUrl,
+        status: res.status,
+        trpcErrorMsg,
+        hasUser: Boolean(result?.user),
+        hasToken: Boolean(apiToken),
+      });
       return NextResponse.json(
-        { error: trpcErrorMsg || result?.message || "E-mail ou senha incorretos." },
+        {
+          error:
+            trpcErrorMsg ||
+            result?.message ||
+            "E-mail ou senha incorretos.",
+        },
         { status: 401 }
       );
     }
 
-    const user = {
+    const user: SessionUser = {
       id: result.user.id,
       openId: result.user.openId,
       name: result.user.name ?? null,
@@ -52,10 +80,12 @@ export async function POST(req: NextRequest) {
       role: result.user.role ?? null,
     };
 
-    // Login do site é só para painel interno
     if (!isAdmin(user)) {
       return NextResponse.json(
-        { error: "Acesso restrito à equipe AxéApp. Use o aplicativo para a sua conta." },
+        {
+          error:
+            "Acesso restrito à equipe AxéApp. Use o aplicativo para a sua conta.",
+        },
         { status: 403 }
       );
     }

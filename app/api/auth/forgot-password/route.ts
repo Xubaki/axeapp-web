@@ -12,15 +12,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.forgotPassword`, {
+    const res = await fetch(`${apiBaseUrl}/api/trpc/auth.forgotPassword?batch=1`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         "0": { json: { email: email.toLowerCase().trim() } },
       }),
     });
-
-    // Sempre retornar sucesso para não revelar se o e-mail existe
+    void res; // resposta ignorada de propósito (não revelar existência do e-mail)
     return NextResponse.json({
       success: true,
       message:
