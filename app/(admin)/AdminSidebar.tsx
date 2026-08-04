@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, CheckSquare, LogOut } from "lucide-react";
+import { LayoutDashboard, CheckSquare, LogOut, Users } from "lucide-react";
 import type { SessionUser } from "@/lib/auth";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/aprovacoes", label: "Aprovações", icon: CheckSquare },
-  // Terreiros / Usuários: links futuros (páginas ainda não existem)
+  { href: "/admin/usuarios", label: "Usuários", icon: Users },
 ];
 
 export function AdminSidebar({ user }: Props) {
