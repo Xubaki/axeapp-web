@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import {
   MapPin,
   Phone,
@@ -12,18 +11,15 @@ import {
   Globe,
 } from "lucide-react";
 import { obterTerreiro, planoBadge } from "@/lib/terreiros";
-
-const MapaTerreiros = dynamic(
-  () => import("@/components/map/MapaTerreiros").then((m) => m.MapaTerreiros),
-  { ssr: false, loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-xl" /> }
-);
+import { MapaTerreirosLazy as MapaTerreiros } from "@/components/map/MapaTerreirosLazy";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = parseInt(params.id);
+  const { id: idParam } = await params;
+  const id = parseInt(idParam);
   if (isNaN(id)) return { title: "Terreiro não encontrado" };
 
   const terreiro = await obterTerreiro(id);
@@ -47,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function TerreiroDetalhePage({ params }: Props) {
-  const id = parseInt(params.id);
+  const { id: idParam } = await params;
+  const id = parseInt(idParam);
   if (isNaN(id)) notFound();
 
   const terreiro = await obterTerreiro(id);

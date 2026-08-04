@@ -38,7 +38,9 @@ const nextConfig = {
     return [];
   },
 
-  // Webpack — evitar problemas com módulos server-only no cliente
+  // Webpack — evitar problemas com módulos server-only no cliente.
+  // Next 16 usa Turbopack por padrão; o build de produção na Hostinger
+  // chama `next build --webpack` (ver package.json) por causa desta config.
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -55,6 +57,9 @@ const nextConfig = {
     };
     return config;
   },
+
+  // Silencia falso positivo se alguém rodar build sem --webpack
+  turbopack: {},
 
   // Excluir pasta backend do TypeScript check do Next.js
   transpilePackages: [],

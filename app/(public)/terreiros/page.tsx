@@ -4,18 +4,19 @@ import { listarTerreiros } from "@/lib/terreiros";
 import { TerreirosBuscaPage } from "./TerreirosBuscaPage";
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     busca?: string;
     estado?: string;
     tradicao?: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const sp = await searchParams;
   const parts = [];
-  if (searchParams.tradicao) parts.push(searchParams.tradicao);
-  if (searchParams.estado) parts.push(searchParams.estado);
-  if (searchParams.busca) parts.push(`"${searchParams.busca}"`);
+  if (sp.tradicao) parts.push(sp.tradicao);
+  if (sp.estado) parts.push(sp.estado);
+  if (sp.busca) parts.push(`"${sp.busca}"`);
 
   return {
     title: parts.length > 0 ? `Terreiros: ${parts.join(", ")}` : "Buscar Terreiros",
@@ -24,19 +25,20 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default async function TarreirosPage({ searchParams }: Props) {
+  const sp = await searchParams;
   const terreiros = await listarTerreiros({
-    busca: searchParams.busca,
-    estado: searchParams.estado,
-    tradicao: searchParams.tradicao,
+    busca: sp.busca,
+    estado: sp.estado,
+    tradicao: sp.tradicao,
   });
 
   return (
     <TerreirosBuscaPage
       terreiros={terreiros}
       initialFilters={{
-        busca: searchParams.busca ?? "",
-        estado: searchParams.estado ?? "",
-        tradicao: searchParams.tradicao ?? "",
+        busca: sp.busca ?? "",
+        estado: sp.estado ?? "",
+        tradicao: sp.tradicao ?? "",
       }}
     />
   );

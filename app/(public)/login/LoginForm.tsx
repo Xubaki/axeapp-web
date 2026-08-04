@@ -33,7 +33,7 @@ export function LoginForm() {
         return;
       }
 
-      const redirectTo = searchParams.get("redirect") || "/admin";
+      const redirectTo = searchParams?.get("redirect") || "/admin";
       router.push(redirectTo.startsWith("/") ? redirectTo : "/admin");
       router.refresh();
     } catch {

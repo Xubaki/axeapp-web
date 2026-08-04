@@ -1,14 +1,8 @@
 // Server Component — sem "use client"
 import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { MapPin, Search } from "lucide-react";
-
-// MobileMenu é client-only (usa useState) — carregado apenas no browser
-const MobileMenu = dynamic(
-  () => import("./MobileMenu").then((m) => m.MobileMenu),
-  { ssr: false }
-);
+import { MobileMenu } from "./MobileMenu";
 
 export function Header() {
   return (

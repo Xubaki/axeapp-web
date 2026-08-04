@@ -8,11 +8,12 @@ export const metadata: Metadata = {
 };
 
 interface Props {
-  searchParams: { token?: string };
+  searchParams: Promise<{ token?: string }>;
 }
 
-export default function NovaSenhaPage({ searchParams }: Props) {
-  const token = searchParams.token ?? "";
+export default async function NovaSenhaPage({ searchParams }: Props) {
+  const sp = await searchParams;
+  const token = sp.token ?? "";
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
