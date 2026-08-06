@@ -1,5 +1,5 @@
 /**
- * lib/usuarios.ts — proxy admin listar/setRole → API mobile (master-only).
+ * lib/usuarios.ts — proxy admin listar/setRole/cortesia/excluir → API mobile (master-only).
  */
 import { apiBaseUrl, unwrapTrpcData, unwrapTrpcError } from "./api";
 
@@ -63,6 +63,68 @@ export async function setUserRole(
     const err = unwrapTrpcError(data);
     if (err || !res.ok) {
       return { ok: false, error: err || "Erro ao atualizar role." };
+    }
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "Erro de conexão com a API." };
+  }
+}
+
+export async function concederCortesiaPorEmail(
+  email: string,
+  sessionToken: string,
+  role: "senior" | "admin" = "senior"
+): Promise<{
+  ok: boolean;
+  error?: string;
+  data?: { id: number; criado: boolean; email: string };
+}> {
+  try {
+    const res = await fetch(
+      `${apiBaseUrl}/api/trpc/admin.concederCortesiaPorEmail?batch=1`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionToken}`,
+        },
+        body: JSON.stringify({ "0": { json: { email, role } } }),
+      }
+    );
+    const data = await res.json();
+    const err = unwrapTrpcError(data);
+    if (err || !res.ok) {
+      return { ok: false, error: err || "Erro ao conceder cortesia." };
+    }
+    const payload = unwrapTrpcData<{ id: number; criado: boolean; email: string }>(
+      data
+    );
+    return { ok: true, data: payload ?? undefined };
+  } catch {
+    return { ok: false, error: "Erro de conexão com a API." };
+  }
+}
+
+export async function excluirUsuarioAdmin(
+  userId: number,
+  sessionToken: string
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const res = await fetch(
+      `${apiBaseUrl}/api/trpc/admin.excluirUsuario?batch=1`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionToken}`,
+        },
+        body: JSON.stringify({ "0": { json: { userId } } }),
+      }
+    );
+    const data = await res.json();
+    const err = unwrapTrpcError(data);
+    if (err || !res.ok) {
+      return { ok: false, error: err || "Erro ao excluir usuário." };
     }
     return { ok: true };
   } catch {
