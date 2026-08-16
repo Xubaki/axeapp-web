@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, MapPin, Search } from "lucide-react";
+import { DONATE_URL } from "@/lib/donate";
 
 export function MobileMenu() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,7 +43,16 @@ export function MobileMenu() {
             >
               Sobre
             </Link>
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
+              <a
+                href={DONATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-amber-400 text-amber-950 px-4 py-2.5 rounded-lg text-sm font-bold"
+                onClick={() => setMenuOpen(false)}
+              >
+                ☕ Doar
+              </a>
               <Link
                 href="/#download"
                 className="flex items-center justify-center bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"

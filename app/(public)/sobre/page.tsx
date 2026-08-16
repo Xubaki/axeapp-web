@@ -6,7 +6,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Sobre o AxéApp",
   description:
-    "Conheça o AxéApp — o guia espiritual mais completo de Umbanda e Candomblé do Brasil.",
+    "Conheça o AxéApp — o guia virtual mais completo de Umbanda e Candomblé do Brasil.",
 };
 
 export default function SobrePage() {

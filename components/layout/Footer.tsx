@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Image from "next/image";
+import { DONATE_URL } from "@/lib/donate";
 
 export function Footer() {
   return (
@@ -63,6 +64,16 @@ export function Footer() {
                 <Link href="/parceiros" className="hover:text-white transition-colors">
                   Terreiro Parceiro
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={DONATE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-300 transition-colors font-semibold"
+                >
+                  ☕ Apoiar o Axé
+                </a>
               </li>
             </ul>
           </div>

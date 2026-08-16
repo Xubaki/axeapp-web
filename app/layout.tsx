@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
+    default: "AxéApp — Guia Virtual de Umbanda e Candomblé",
     template: "%s | AxéApp",
   },
   description:
-    "Encontre terreiros de Umbanda e Candomblé perto de você. Guia espiritual completo com mapa interativo, informações sobre as tradições do Axé e comunidade.",
+    "Encontre terreiros de Umbanda e Candomblé perto de você. Guia virtual completo com mapa interativo, informações sobre as tradições do Axé e comunidade.",
   keywords: [
     "umbanda",
     "candomblé",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "espiritismo",
     "tradições do axé",
     "axé",
-    "guia espiritual",
+    "guia virtual",
   ],
   authors: [{ name: "AxéApp" }],
   creator: "AxéApp",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "https://appaxe.com.br",
     siteName: "AxéApp",
-    title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
+    title: "AxéApp — Guia Virtual de Umbanda e Candomblé",
     description:
       "Encontre terreiros, aprenda sobre as tradições do Axé e conecte-se com a comunidade espiritual.",
     images: [
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AxéApp — Guia Espiritual",
+        alt: "AxéApp — Guia virtual",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
+    title: "AxéApp — Guia Virtual de Umbanda e Candomblé",
     description:
       "Encontre terreiros, aprenda sobre as tradições do Axé e conecte-se com a comunidade espiritual.",
     images: ["/og-image.png"],

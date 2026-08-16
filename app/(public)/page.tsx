@@ -9,9 +9,9 @@ import { SearchBar } from "@/components/ui/SearchBar";
 import { TradicoesSection } from "@/components/home/TradicoesSection";
 
 export const metadata: Metadata = {
-  title: "AxéApp — Guia Espiritual de Umbanda e Candomblé",
+  title: "AxéApp — Guia Virtual de Umbanda e Candomblé",
   description:
-    "Encontre terreiros de Umbanda e Candomblé perto de você. Mapa interativo, guia espiritual e comunidade do Axé.",
+    "Encontre terreiros de Umbanda e Candomblé perto de você. Mapa interativo, guia virtual e comunidade do Axé.",
 };
 
 export default async function HomePage() {
@@ -36,7 +36,7 @@ export default async function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
               <Image src="/logo.png" alt="AxéApp" width={18} height={18} className="rounded-sm" />
-              <span>O guia espiritual de Umbanda e Candomblé</span>
+              <span>O guia virtual de Umbanda e Candomblé</span>
             </div>
 
             {/* Headline */}
@@ -238,7 +238,7 @@ export default async function HomePage() {
                 <div className="text-center">
                   <Image src="/logo.png" alt="AxéApp" width={80} height={80} className="rounded-2xl mx-auto mb-4" />
                   <p className="text-white/80 text-sm font-medium">AxéApp</p>
-                  <p className="text-white/60 text-xs mt-1">Guia Espiritual</p>
+                  <p className="text-white/60 text-xs mt-1">Guia virtual</p>
                 </div>
               </div>
             </div>
@@ -247,7 +247,7 @@ export default async function HomePage() {
       </section>
 
       {/* BuyMeACoffee Section */}
-      <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+      <section id="doar" className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Decorative element */}
           <div className="flex justify-center mb-6"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C17F24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21h6M12 21V9"/><path d="M12 9C12 6 9 4 9 4s0 4 3 5z"/><path d="M12 9C12 6 15 4 15 4s0 4-3 5z"/><rect x="9" y="9" width="6" height="12" rx="1"/></svg></div>
