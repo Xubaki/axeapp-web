@@ -39,6 +39,10 @@ const nextConfig = {
     ];
   },
 
+  // Hostinger/Apache manda /ajuda → /ajuda/; o Next devolve 308 para /ajuda.
+  // Sem isto o navegador entra em ERR_TOO_MANY_REDIRECTS.
+  skipTrailingSlashRedirect: true,
+
   // Redirects
   async redirects() {
     return [];
