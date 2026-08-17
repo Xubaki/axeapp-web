@@ -30,7 +30,7 @@ const FAQ = [
   {
     pergunta: "Como apoio o projeto?",
     resposta:
-      "O AxéApp é um projeto independente. No aplicativo, acesse Perfil e escolha Apoiar o Axé. Para outras formas de contato, escreva para erik@appaxe.com.br.",
+      "O AxéApp é um projeto independente. No aplicativo, acesse Perfil e escolha Apoiar o Axé. Para assuntos de imprensa e mídias sociais, escreva para midia@appaxe.com.br.",
   },
 ];
 
@@ -60,8 +60,7 @@ export default function AjudaPage() {
               A exclusão é permanente. Os dados são removidos em até 30 dias, nos termos da LGPD.
             </p>
             <p>
-              Se preferir solicitar por e-mail, escreva para <a className="font-medium text-[#A66B1A] underline" href="mailto:erik@appaxe.com.br">erik@appaxe.com.br</a>{" "}
-              ou <a className="font-medium text-[#A66B1A] underline" href="mailto:midia@appaxe.com.br">midia@appaxe.com.br</a>. O prazo de resposta é de até 15 dias úteis.
+              Se preferir solicitar por e-mail, escreva exclusivamente para <a className="font-medium text-[#A66B1A] underline" href="mailto:erik@appaxe.com.br">erik@appaxe.com.br</a>. Erik Ferris é o Encarregado de Dados (DPO) do AxéApp. O prazo de resposta é de até 15 dias úteis.
             </p>
           </div>
         </div>
